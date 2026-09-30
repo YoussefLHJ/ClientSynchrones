@@ -1,8 +1,30 @@
-<img width="975" height="548" alt="image" src="https://github.com/user-attachments/assets/925752e8-463b-4d1b-ac5b-4cea14539649" />
-<img width="975" height="548" alt="image" src="https://github.com/user-attachments/assets/a4ab9740-856e-4179-9b4f-6b7f481a1ceb" />
-<img width="975" height="548" alt="image" src="https://github.com/user-attachments/assets/04c9166f-7961-4809-96de-9b4c1f781c60" />
-<img width="975" height="548" alt="image" src="https://github.com/user-attachments/assets/ac2bbda8-143b-4846-b2d7-4c0d0d4ec77f" />
-<img width="975" height="548" alt="image" src="https://github.com/user-attachments/assets/e88a04bf-7ab6-4339-935d-164666d01765" />
-<img width="975" height="548" alt="image" src="https://github.com/user-attachments/assets/7818d62a-98ab-4f43-899b-e847170deacb" />
-<img width="975" height="548" alt="image" src="https://github.com/user-attachments/assets/c437d78b-4de3-449e-b18d-ce8ec69cff09" />
-<img width="975" height="548" alt="image" src="https://github.com/user-attachments/assets/a4cf3e91-95a1-49de-bfe1-8c71bc27cc7d" />
+# Spring Cloud Service Discovery
+
+Small Spring-based service-discovery and inter-service communication project.
+
+## Architecture
+
+```text
+service-client --OpenFeign--> service-voiture
+        \                         /
+         \---- Eureka Server -----/
+
+Prometheus <--- application metrics ---> Grafana
+```
+
+The repository contains an Eureka server, a client service, and a vehicle service. `service-client` includes an OpenFeign client for calling `service-voiture`.
+
+## Observability and Load Testing
+
+`prometheus.yml`, Grafana provisioning files, and `test_plan.jmx` are included for metrics visualisation and JMeter-based load testing. Docker Compose currently provisions Prometheus and Grafana; application services are configured in their own modules.
+
+## Getting Started
+
+1. Build each Maven module.
+2. Start Eureka Server, then the application services.
+3. Start the monitoring stack with `docker compose up`.
+4. Import or run `test_plan.jmx` with JMeter when load testing is required.
+
+## Service Discovery
+
+The checked-in configuration demonstrates Eureka. No Consul configuration is documented in this repository.
